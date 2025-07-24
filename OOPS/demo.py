@@ -6,9 +6,9 @@
 #     def introduce(self):
 #         print(f"My name is {self.name} and I am {self.age} years old.")
 
-# class Student(Person):
+# class Student(Person):      # Inherits from Person
 #     def __init__(self, name, age, major):
-#         super().__init__(name, age)
+#         super().__init__(name, age)     # Calls the constructor of the Person(parent) class
 #         self.major = major
     
 #     def introduce(self):
@@ -16,14 +16,17 @@
 #         print(f"I am majoring in {self.major}.")
 
 # def main():
-#     student = Student("Alice", 20, "Computer Science")
-#     student.introduce()
+#     student = Student("Keerthan K", 20, "Computer Science")
+#     student.introduce()     # Calls the overridden method in Student class
 
 # if __name__ == "__main__":
 #     main()
 
+# # Output:
+# # My name is Keerthan K and I am 20 years old.
+# # I am majoring in Computer Science.
 
-
+##########################################################################################
 
 # class Employee:
 #     def __init__(self, name, title, hourly_pay,x):
@@ -40,6 +43,7 @@
     
 #     def payPerYear(self):
 #         return self.hourly_pay*self.hours_per_week*52
+    
 # class Manager(Employee):
 #     def __init__(self, name, title, salary, bonus, reports=None):
 #         super().__init__(name, title,0,0)
@@ -60,13 +64,20 @@
     
 #     for emp in employees:
 #         print(f"Name: {emp.getName()}, Annual Pay: {emp.payPerYear()}")
-#         if isinstance(emp, Manager):
-#             print(f"Reports: {', '.join(emp.getReports())}")
+#         if isinstance(emp, Manager):        # Check if emp is an instance of Manager, because only Manager has reports
+#             print(f"Reports: {', '.join(emp.getReports())}")    # join() - joins elements of a list into a single string, separated by the given delimiter—in this case, ", "
+#         print()
 
 # if __name__ == "__main__":
 #     main()
 
+# # Output:
+# # Name: John, Annual Pay: 78000
 
+# # Name: Alice, Annual Pay: 135000
+# # Reports: XYZ, ABC
+
+##########################################################################################
 
 # class BankAccount:
 #     def __init__(self,account_number,initial_balance=0.0):
@@ -117,6 +128,12 @@
 # if __name__ == "__main__":
 #     main()
 
+# # Output:
+# # Balance:1530.0
+# # Checking Account Balance:1897.5
+
+
+##########################################################################################
 
 # class A:
 #     def greet(self):
@@ -135,15 +152,19 @@
 
 # def main():
 #     d=D()
-#     d.greet()
+#     d.greet()       # Calls the greet method from class B due to method resolution order (MRO)
     
 # if __name__=="__main__":
 #     main()
 
+# # Output:
+# # Hello from B
+
+##########################################################################################
 
 
 # from abc import ABC,abstractmethod
-# class Shape(ABC):
+# class Shape(ABC):       # Inherits Abstract Base Class(ABC)
 #     @abstractmethod
 #     def area(self):
 #         pass
@@ -180,44 +201,54 @@
 
 # if __name__ == "__main__":
 #     main()
-
-
-
-# from abc import ABC,abstractmethod
-# class Flyer(ABC):
-#     @abstractmethod
-#     def fly(self):
-#         pass
-
-# class Swimmer(ABC):
-#     @abstractmethod
-#     def swim(self):
-#         pass
-
-# class Duck(Flyer,Swimmer):
-#     def fly(self):
-#         print("Flying with wings.")
     
-#     def swim(self):
-#         print("Swimming with webbed feet.")
+# # Output:
+# # Rectangle: Area = 12, Perimeter = 14
+# # Circle: Area = 78.53999999999999, Perimeter = 31.416
 
-# def main():
-#     duck=Duck()
-#     duck.fly()
-#     duck.swim()
+##########################################################################################
 
-# if __name__=="__main__":
-#     main()
+
+from abc import ABC,abstractmethod
+class Flyer(ABC):
+    @abstractmethod
+    def fly(self):
+        pass
+
+class Swimmer(ABC):
+    @abstractmethod
+    def swim(self):
+        pass
+
+class Duck(Flyer,Swimmer):
+    def fly(self):
+        print("Flying with wings.")
     
+    def swim(self):
+        print("Swimming with webbed feet.")
+
+def main():
+    duck=Duck()
+    duck.fly()
+    duck.swim()
+
+if __name__=="__main__":
+    main()
+    
+# Output:
+# Flying with wings.
+# Swimming with webbed feet.
+
+##########################################################################################
     
 # Mini-Project
 from abc import ABC, abstractmethod
 import random
 
 
-class Animals(ABC):
-    def __init__(self,name,health_level,hunger,habitat_type,):
-        self._name = name
+class Animals(ABC):     # Abstract Base Class for Animals
+    def __init__(self,name,health_level,hunger,habitat_type):
+        self._name = name       # Protected attribute - underscore
         self._health = health_level
         self._hunger = hunger
         self._habitat_type = habitat_type
@@ -239,13 +270,13 @@ class Animals(ABC):
     def get_habitat_type(self):
         return self._habitat_type
 
-    def decrease_health(self, amount):
+    def decrease_health(self, amount):      # Decreases health but does not go below 0
         self._health = max(self._health - amount, 0)
 
     def decrease_hunger(self, amount):
         self._hunger = max(self._hunger - amount, 0)
 
-    def increase_health(self, amount):
+    def increase_health(self, amount):      # Increases health but does not exceed 100
         self._health = min(self._health + amount, 100)
 
     def increase_hunger(self, amount):
@@ -259,6 +290,7 @@ class Lion(Animals):
     def make_sound(self):
         print(f"{type(self).__name__} Roar!")
 
+     # for lion - hunger decreases by 2x food amount and health increases by 0.5x food amount
     def feed(self, food_amount):
         temp = self.get_hunger()
         self.decrease_hunger(food_amount * 2)
@@ -294,7 +326,8 @@ class Parrot(Animals):
         print(f"Feeding {type(self).__name__} {temp} -> {self.get_hunger()}")
 
 
-class Habitat(ABC):
+
+class Habitat(ABC):     # Abstarct Base Class for Habitat
     def __init__(self, type, condition, animals=None):
         self._type = type
         self._condition = condition
@@ -305,7 +338,7 @@ class Habitat(ABC):
         pass
 
     def add_animal(self, animal: Animals):
-        if animal.get_habitat_type() == self._type:
+        if animal.get_habitat_type() == self._type:     # Check if animal belongs to this habitat
             self._animals.append(animal)
         else:
             print(f"{animal._name} doesn't belong to {self._type}")
@@ -465,7 +498,10 @@ def main():
         Jungle(75),
         Aviary(100),
     ]
-    staff = [Caretaker("Shek", 50), Veterinarian("Harry", 85)]
+    staff = [
+        Caretaker("Shek", 50),
+        Veterinarian("Harry", 85),
+    ]
 
     sanctuary = Sanctuary(animals, habitats, staff)
     # Add animals to their habitats
