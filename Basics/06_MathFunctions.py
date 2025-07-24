@@ -15,3 +15,6 @@ print(math.sqrt(pi))  #1.772004514666935
 x,y,z=1,2,3
 print(max(x,y,z))  #3
 print(min(x,y,z))  #1
+
+# max(), min(), len(), sum(), etc. are built-in functions in Python, so you don’t need to use math. with them.
+# math.ceil(), math.floor(), and math.sqrt() are part of the math module, so you must prefix them with math.

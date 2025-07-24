@@ -37,11 +37,5 @@ for i in name:
 import time
 for count in range(10,0,-1):
     print(count)
-    time.sleep(1)
+    time.sleep(1)       # Delay execution for a given number of seconds. 
 print("HAPPY NEW YEAR!")
-
-
-#Count-down timer
-timeSec=int(input("Enter time in seconds:"))
-for x in range(0,timeSec):
-    

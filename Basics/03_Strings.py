@@ -24,7 +24,7 @@ print(x.isdigit())          #True
 username=input("Enter Username:")
 if len(username)>12:
     print("Username can't be more than 12 chracters.")
-elif not username.find(" "):            #If not found it will return -1
+elif " " in username:
     print("Username can't have space.")
 elif not username.isalpha():                #Return True if the string is an alphabetic string, False otherwise.
     print("Username cannot have digits.")
@@ -32,7 +32,10 @@ else:
     print(f"Welcome {username}!")
 # Output:
 # Enter Username:Bro Code
-# Username cannot have digits.
+# Username can't have space.
 
 # Enter Username:BroCode
 # Welcome BroCode!
+
+# Enter Username:Keerthan K Mangaluru 
+# Username can't be more than 12 chracters.

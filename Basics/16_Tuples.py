@@ -11,3 +11,7 @@ for x in student1:
 
 if "Bro" in student1:
     print("Bro is male")
+    
+    
+# Tuple is Immutable
+# student1[0] = 10                # ❌ Error: 'tuple' object does not support item assignment

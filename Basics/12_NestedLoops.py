@@ -5,7 +5,7 @@ symbol=input("Enter a symbol to use:")
 for i in range(rows):
     for j in range(cols):
         print(symbol,end="")            #end="",prevents new line.
-    print()
+    print()     #Prints a new line after each row.
 
 #Output:
 # How many rows?3

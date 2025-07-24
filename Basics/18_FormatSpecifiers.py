@@ -2,7 +2,11 @@
 
 price=3.14159
 print(f"Price 1 is {price:.2f} dollars")  #Price 1 is 3.14 dollars
-print(f"Price 1 is {price:10} dollars")  #Price 1 is    3.14159 dollars
+print(f"Price 1 is {price:10} dollars")   #Price 1 is    3.14159 dollars
 print(f"Price 1 is {price:010} dollars")  #Price 1 is 0003.14159 dollars
 print(f"Price 1 is {price:<10} dollars")  #Price 1 is 3.14159    dollars
-print(f"Price 1 is {price:>10} dollars")  #Price 1 is    3.14159 dollars
+print(f"Price 1 is {price:>10} dollars")  #Price 1 is    3.14159 dollars  (default is right alignment)
+print(f"Price 1 is {price:^10} dollars")  #Price 1 is   3.14159   dollars
+print(f"Price 1 is {price:0<10} dollars") #Price 1 is 3.14159000 dollars
+print(f"Price 1 is {price:0>10} dollars") #Price 1 is 0003.14159 dollars
+print(f"Price 1 is {price:0^10} dollars") #Price 1 is 0003.14159 dollars

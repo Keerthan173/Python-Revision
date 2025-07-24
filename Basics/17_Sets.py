@@ -1,15 +1,16 @@
-# set - collection which is unordered,unindexed.
+# set - collection which is unordered,unindexed.{}
 # No duplicate values.
 # Faster than list. 
 
 utensils={"fork","spoon","knife","spoon"}
 print(utensils)  #{'knife', 'spoon', 'fork'}
+print(utensils)  #{'spoon', 'fork', 'knife'}         # Order is not guaranteed.
 
 utensils.add("napkin")
 utensils.remove("fork")
 
 dishes={"towl","cup"}
-utensils.update(dishes)
+utensils.update(dishes)     # Update a set with the union of itself and others
 print(utensils)   #{'towl', 'napkin', 'knife', 'cup', 'spoon'}
 utensils.clear()
 dishes.clear()

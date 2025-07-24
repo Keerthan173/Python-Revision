@@ -37,3 +37,9 @@ print(food.index("ragi"))  #1
 
 food.clear()
 print(food)  #[]
+
+
+
+# Python lists are heterogeneous, meaning they can contain items of different data types.
+mixed_list = [1, "apple", 3.14, True]
+print(mixed_list)  # [1, 'apple', 3.14, True]
