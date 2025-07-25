@@ -2,11 +2,11 @@
 
 # Exercise 1: Password Hashing & Verification
 # • Create a simple script:
-# o Input a password
-# o Hash it with bcrypt
-# o Store it in a variable or dictionary
-# o Prompt the user again to enter the password
-# o Verify it using the hash
+    # o Input a password
+    # o Hash it with bcrypt
+    # o Store it in a variable or dictionary
+    # o Prompt the user again to enter the password
+    # o Verify it using the hash
 # • Try hashing the same password multiple times—observe the hashes
 # • Print “Access granted” or “Invalid password” based on verification
 

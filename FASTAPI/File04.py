@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-import FASTAPI.routerExample as routerExample
 app = FastAPI()
 
 @app.get("/")
@@ -20,11 +19,15 @@ def add_number(number1: int, number2: int):
         "division": f"{number1} / {number2} = {division}"
     }
     
-# @app.get("/items/{item}")
-# def myfunc(item:str):
-#     return{
-#         "message":f"{item} is receeived"
-#     }
+    
+# Go to: http://127.0.0.1:8000 → returns {"message": "Hello World"}
 
-
-app.include_router(routerExample.router)
+# Try this (with query params):
+# http://127.0.0.1:8000/calculate?number1=10&number2=5
+# Output:
+# {
+#   "sum": "10 + 5 = 15",
+#   "difference": "10 - 5 = 5",
+#   "product": "10 * 5 = 50",
+#   "division": "10 / 5 = 2.0"
+# }

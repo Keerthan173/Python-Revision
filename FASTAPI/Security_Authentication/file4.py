@@ -9,7 +9,7 @@
 
 from datetime import datetime, timedelta, timezone
 import bcrypt
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Header
 import jwt
 from pydantic import BaseModel
 
@@ -35,6 +35,7 @@ def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes
     token = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return token
 
+# Login route: returns access token
 @app.post("/login")
 def login(login_request: LoginRequest):
     email = login_request.email
@@ -49,9 +50,44 @@ def login(login_request: LoginRequest):
     access_token = create_access_token({'email':email})
     return {"access_token":access_token}
 
-@app.get('/me')
+
+# ✅ Dependency to get current user from token
+def get_current_user(authorization: str = Header(...)):
+    #FastAPI automatically reads the Authorization header from the request.
+    # Example header:
+        # Authorization: Bearer eyJhbGciOiJIUzI1NiIsIn...
+    try:
+        scheme, _, token = authorization.partition(" ")
+        # Splits the header into:
+        # scheme = "Bearer"
+        # token = "eyJhbGciOi..." (your JWT)
+        # partition(" ") splits once at the first space.
+        
+        if scheme.lower() != "bearer":          # Makes sure the scheme is Bearer
+            raise HTTPException(status_code=401, detail="Invalid auth scheme")
+        
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        email = payload.get("email")
+        return {
+            "email":email
+        }
+        
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token expired")
+    except jwt.PyJWTError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    
+    
+# 🔐 Protected Route
+@app.get("/me")
 def read_current_user(current_user: dict = Depends(get_current_user)):
     return {
-        "message":"You are authenticated",
+        "message": "You are authenticated",
         "user": current_user
     }
+
+# 🔹 Depends(get_current_user)
+# Tells FastAPI:
+# 👉 "Before calling read_current_user(), run get_current_user()."
+
+# The result of get_current_user() (a dictionary with user info) is injected into the current_user parameter.
